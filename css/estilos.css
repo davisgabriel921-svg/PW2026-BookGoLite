@@ -1,0 +1,55 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; line-height: 1.6; color: #1b2733; background: #f2f7f7; }
+h1, h2, h3 { font-family: Georgia, serif; color: #0f3d4c; line-height: 1.2; }
+a { color: #0b6b7a; }
+a:hover { color: #b45309; }
+a:focus, button:focus, input:focus, select:focus { outline: 3px solid #f59e0b; outline-offset: 2px; }
+
+.cab { background: #0f3d4c; padding: 0.8rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.logo { color: #fff; text-decoration: none; font: 700 1.3rem Georgia, serif; }
+.logo span { color: #f59e0b; font-size: 0.9rem; }
+.cab nav { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; }
+.cab nav a, .cab .enlace { color: #fff; text-decoration: none; padding: 0.4rem 0.8rem; border-radius: 6px; }
+.cab nav a:hover, .cab .enlace:hover { background: #f59e0b; color: #0f3d4c; }
+.quien { color: #bfe3ea; font-size: 0.9rem; }
+
+main { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+.en-linea { display: inline; margin: 0; }
+.enlace { background: none; border: 0; font: inherit; color: #0b6b7a; cursor: pointer; text-decoration: underline; }
+
+.boton { display: inline-block; background: #f59e0b; color: #0f3d4c; font: inherit; font-weight: 700; padding: 0.6rem 1.3rem; border: 2px solid #0f3d4c; border-radius: 999px; cursor: pointer; }
+.boton:hover { background: #0f3d4c; color: #f59e0b; }
+
+.filtros { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+.filtros input, .filtros select { flex: 1 1 200px; }
+input, select { padding: 0.6rem; font: inherit; border: 2px solid #9fb8bd; border-radius: 6px; }
+
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.tarjeta { background: #fff; border: 1px solid #cfe0e3; border-left: 6px solid #f59e0b; border-radius: 8px; padding: 1rem 1.2rem; }
+.tarjeta h3 { margin: 0.2rem 0 0.5rem; }
+.etiqueta { margin: 0; font-size: 0.8rem; text-transform: uppercase; color: #0b6b7a; font-weight: 700; }
+.precio { font-weight: 700; color: #0f3d4c; }
+
+.formulario { background: #fff; border: 1px solid #cfe0e3; border-radius: 10px; padding: 1.5rem; max-width: 560px; margin-bottom: 1.5rem; }
+.formulario label { display: block; font-weight: 600; margin: 0.9rem 0 0.3rem; }
+.formulario input, .formulario select { width: 100%; }
+.formulario .boton { margin-top: 1.2rem; }
+
+.ok, .error, .aviso { padding: 0.7rem 1rem; border-radius: 6px; border: 1px solid; }
+.ok { background: #e6f6ec; border-color: #2f9e5b; color: #14532d; }
+.error { background: #fdeaea; border-color: #c0392b; color: #7a1f16; }
+.aviso { background: #fff7e0; border-color: #f59e0b; color: #5b3a00; }
+
+.tabla-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: #fff; }
+th, td { border: 1px solid #cfe0e3; padding: 0.55rem 0.8rem; text-align: left; }
+thead th { background: #0f3d4c; color: #fff; }
+tbody tr:nth-child(even) { background: #eef6f7; }
+
+.pie { background: #0f3d4c; color: #fff; text-align: center; padding: 1rem; margin-top: 2rem; font-size: 0.9rem; }
+
+@media (max-width: 700px) {
+    .cab { flex-direction: column; align-items: flex-start; }
+    .cab nav { margin-left: 0; }
+    h1 { font-size: 1.7rem; }
+}
