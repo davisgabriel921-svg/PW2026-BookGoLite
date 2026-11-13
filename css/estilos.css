@@ -53,3 +53,7 @@ tbody tr:nth-child(even) { background: #eef6f7; }
     .cab nav { margin-left: 0; }
     h1 { font-size: 1.7rem; }
 }
+
+.tarjeta h3 a { text-decoration: none; }
+.resena { margin-bottom: 0.8rem; }
+td form select, td form input[type="text"] { padding: 0.3rem; max-width: 160px; }

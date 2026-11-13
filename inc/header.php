@@ -19,6 +19,8 @@
             <a href="<?= $raiz ?>admin/index.php">Panel</a>
             <a href="<?= $raiz ?>admin/categorias.php">Categorías</a>
             <a href="<?= $raiz ?>admin/servicios.php">Servicios</a>
+            <a href="<?= $raiz ?>admin/horarios.php">Horarios</a>
+            <a href="<?= $raiz ?>admin/reservas.php">Reservas</a>
         <?php else: ?>
             <a href="<?= $raiz ?>reservas.php">Mis reservas</a>
         <?php endif; ?>

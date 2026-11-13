@@ -1,5 +1,6 @@
 <?php
 $raiz = $raiz ?? "";
+date_default_timezone_set("America/Panama");
 
 if (PHP_SAPI !== "cli") {
     ini_set("session.cookie_httponly", "1");
@@ -83,4 +84,9 @@ function requerir_rol($rol)
         http_response_code(403);
         die("Acceso denegado.");
     }
+}
+
+function es_futuro($fecha, $hora)
+{
+    return strtotime($fecha . " " . $hora) > time();
 }

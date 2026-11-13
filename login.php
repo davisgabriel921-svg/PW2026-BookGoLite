@@ -11,24 +11,39 @@ unset($_SESSION["ok"]);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     csrf_validar();
-    $correo = trim($_POST["correo"] ?? "");
-    $clave = $_POST["clave"] ?? "";
+    $espera = ($_SESSION["bloqueo_hasta"] ?? 0) - time();
 
-    $stmt = $pdo->prepare("SELECT u.id_usuario, u.nombre, u.contrasena, u.estado, r.nombre AS rol
-        FROM usuarios u JOIN roles r ON r.id_rol = u.id_rol WHERE u.correo = ?");
-    $stmt->execute([$correo]);
-    $fila = $stmt->fetch();
+    if ($espera > 0) {
+        $err = "Demasiados intentos fallidos. Espere " . $espera . " segundos.";
+    } else {
+        $correo = trim($_POST["correo"] ?? "");
+        $clave = $_POST["clave"] ?? "";
 
-    if ($fila && $fila["estado"] == 1 && password_verify($clave, $fila["contrasena"])) {
-        session_regenerate_id(true);
-        $_SESSION["usuario"] = [
-            "id" => (int)$fila["id_usuario"],
-            "nombre" => $fila["nombre"],
-            "rol" => $fila["rol"]
-        ];
-        ir($fila["rol"] === "ADMIN" ? "admin/index.php" : "index.php");
+        $stmt = $pdo->prepare("SELECT u.id_usuario, u.nombre, u.contrasena, u.estado, r.nombre AS rol
+            FROM usuarios u JOIN roles r ON r.id_rol = u.id_rol WHERE u.correo = ?");
+        $stmt->execute([$correo]);
+        $fila = $stmt->fetch();
+
+        if ($fila && $fila["estado"] == 1 && password_verify($clave, $fila["contrasena"])) {
+            session_regenerate_id(true);
+            unset($_SESSION["intentos"], $_SESSION["bloqueo_hasta"]);
+            $_SESSION["usuario"] = [
+                "id" => (int)$fila["id_usuario"],
+                "nombre" => $fila["nombre"],
+                "rol" => $fila["rol"]
+            ];
+            ir($fila["rol"] === "ADMIN" ? "admin/index.php" : "index.php");
+        }
+
+        $_SESSION["intentos"] = ($_SESSION["intentos"] ?? 0) + 1;
+        if ($_SESSION["intentos"] >= 5) {
+            $_SESSION["bloqueo_hasta"] = time() + 60;
+            $_SESSION["intentos"] = 0;
+            $err = "Demasiados intentos fallidos. Espere 60 segundos.";
+        } else {
+            $err = "Correo o contraseña incorrectos.";
+        }
     }
-    $err = "Correo o contraseña incorrectos.";
 }
 require "inc/header.php";
 ?>

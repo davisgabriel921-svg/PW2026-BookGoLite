@@ -45,7 +45,7 @@ require "inc/header.php";
         <?php foreach ($servicios as $s): ?>
             <article class="tarjeta">
                 <p class="etiqueta"><?= e($s["categoria"]) ?></p>
-                <h3><?= e($s["nombre"]) ?></h3>
+                <h3><a href="servicio.php?id=<?= (int)$s["id_servicio"] ?>"><?= e($s["nombre"]) ?></a></h3>
                 <p><?= e($s["descripcion"]) ?></p>
                 <p class="precio">$<?= number_format($s["precio"], 2) ?> · <?= (int)$s["duracion_min"] ?> min</p>
             </article>
